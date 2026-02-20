@@ -1,0 +1,9 @@
+1. Semantic search finds information based on meaning, not exact words.
+
+2. Word embeddings (Word to Vector/Word2Vec) are a way to represent words as numbers so machines can understand their meaning.
+
+Instead of treating words as just text, embeddings convert each word into a vector (a list of numbers) where words with similar meanings have similar numerical representations.
+
+3. Vector - Distance and direction
+
+4. X & Y - 2D, X & Y & Z = 3D , X , Y, Z (different direction) - Multi Dimensional array

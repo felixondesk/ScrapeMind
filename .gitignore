@@ -1,0 +1,9 @@
+node_modules/
+.env
+*.log
+.gemini/
+brain/
+*.js.map
+dist/
+build/
+.DS_Store

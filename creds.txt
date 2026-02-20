@@ -1,0 +1,9 @@
+MongoDB
+
+uname: felixondesk_db_user
+pwd: nPXkeOlFmPJub1RR
+
+Collection
+
+uname: chirs
+pwd: s5OrrmmjDghyC7Tq
