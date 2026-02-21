@@ -7,3 +7,6 @@ brain/
 dist/
 build/
 .DS_Store
+context.txt
+creds.txt
+notes.txt
