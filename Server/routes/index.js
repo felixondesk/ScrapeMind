@@ -9,10 +9,22 @@ const pdfParser = new PDFParser(this, 1);
 router.get('/', function (req, res, next) {
   res.json({ title: 'Express' });
 });
+const { client } = require("../connection")
 
 router.get('/loaddoc', async (req, res) => {
   try {
-    pdfParser.loadPDF(path.join(__dirname, '..', 'docs', 'insurance.pdf'));
+    pdfParser.loadPDF(path.join(__dirname, '..', 'docs', 'insurance.pdf'))
+    pdfParser.on("pdfParser_dataReady", async (pdfData) => {
+      await fs.writeFileSync(path.join(__dirname, '..', '..', 'context.txt'), pdfParser.getRawTextContent());
+    });
+    const context = await fs.readFileSync(path.join(__dirname, '..', '..', 'context.txt'), 'utf-8');
+    const splitContents = context.split("\n");
+    for (line of splitContents) {
+      let embedding = await createEmbedding(line);
+      const db = client.db("ScrapeMind");
+      const collection = db.collection("embeddings");
+      await collection.insertOne({ embedding, text: line });
+    }
     res.json({ message: "PDF loaded successfully" });
   } catch (error) {
     console.log(error);
@@ -20,9 +32,7 @@ router.get('/loaddoc', async (req, res) => {
   }
 })
 
-pdfParser.on("pdfParser_dataReady", async (pdfData) => {
-  await fs.writeFileSync(path.join(__dirname, '..', '..', 'context.txt'), pdfParser.getRawTextContent());
-});
+
 
 pdfParser.on("pdfParser_dataError", async (error) => {
   console.error(error);

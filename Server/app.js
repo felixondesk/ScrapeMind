@@ -7,7 +7,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-require('./connection');
+const { run } = require('./connection');
+run();
 var app = express();
 
 // view engine setup
