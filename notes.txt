@@ -7,3 +7,7 @@ Instead of treating words as just text, embeddings convert each word into a vect
 3. Vector - Distance and direction
 
 4. X & Y - 2D, X & Y & Z = 3D , X , Y, Z (different direction) - Multi Dimensional array
+
+5. Normal database indexing finds exact matches (e.g., name = "John").
+
+Vector indexing finds similar meaning (e.g., “back pain treatment” ≈ “therapy for spine discomfort”)

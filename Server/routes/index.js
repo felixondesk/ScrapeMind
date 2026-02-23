@@ -41,12 +41,29 @@ pdfParser.on("pdfParser_dataError", async (error) => {
 router.get('/embeddings', async (req, res) => {
   try {
     const { text } = req.query;
-    const embedding = await createEmbedding("Hello world");
+    const embedding = await createEmbedding(text);
     res.json({ embedding });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
   }
 });
+
+router.post("/conversation", async (req, res) => {
+  try {
+    let { sessionID } = req.body;
+    const db = client.db("ScrapeMind");
+    if (!sessionID) {
+      const collection = db.collection("sessions");
+      const session = await collection.insertOne({ createdAt: new Date() });
+      sessionID = session._id;
+    }
+    res.json({ message: "Session created successfully" });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+})
 
 module.exports = router;
